@@ -31,11 +31,10 @@ This project is a static HTML/CSS website dedicated to showcasing the rich histo
 > **Note:**  
 > This website is static and does not include backend functionality. All forms are for layout/demo purposes only.
 
-## Credits
 
-- Images are sourced from Unsplash and Wikimedia Commons under appropriate licenses.
 - All content is for educational and non-commercial use.
 
 ---
 
-&copy; 2025 Ethiopia Heritage. All rights reserved.
+&copy; 2025
+All rights reserved.
