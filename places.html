@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethiopia's Heritage - Places</title>
+    <style>
+        /* Global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: #4b1d1d;
+            color: #fff;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffcc00;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #fff;
+        }
+        
+        /* Navigation styles */
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: #ffcc00;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        /* Active page styling */
+        .active {
+            color: #ffcc00 !important;
+        }
+        
+        .active:after {
+            width: 100%;
+            background-color: #ffcc00;
+        }
+        
+        /* Login/Logout link styling */
+        .login-link {
+            background-color: #ffcc00;
+            color: #333 !important;
+            padding: 8px 15px !important;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .login-link:hover {
+            background-color: #e6b800;
+            color: #333 !important;
+        }
+        
+        .login-link:after {
+            display: none;
+        }
+        
+        .user-menu {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .user-menu-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #fff;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 101;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .user-menu:hover .user-menu-content {
+            display: block;
+        }
+        
+        .user-menu-content a {
+            color: #333 !important;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        
+        .user-menu-content a:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .user-menu-content a:after {
+            display: none;
+        }
+        
+        /* Places section */
+        .places-section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #4b1d1d;
+            position: relative;
+            text-align: center;
+            display: inline-block;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #ffcc00;
+        }
+        
+        /* Cards Grid */
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .place-card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .place-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .place-image {
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .place-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .place-card:hover .place-image img {
+            transform: scale(1.1);
+        }
+        
+        .place-info {
+            padding: 20px;
+        }
+        
+        .place-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #4b1d1d;
+        }
+        
+        .place-description {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        /* Footer styles */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffcc00;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+            display: flex;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links li {
+            margin: 0 15px;
+        }
+        
+        .footer-links li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links li a:hover {
+            color: #ffcc00;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .places-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .places-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">Ethiopia<span>Heritage</span></a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="places.html" class="active">Places</a></li>
+                        <li><a href="flights.html">Flights</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li class="user-menu">
+                            <a href="login.html" class="login-link">Login</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Places Section -->
+    <section class="places-section">
+        <div class="container">
+            <h2 class="section-title">Ethiopia's Heritage Sites</h2>
+            <div class="places-grid">
+                <!-- Lalibela -->
+                <div class="place-card">
+                    <div class="place-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Ethiopia-Lalibela-Church_of_Saint_George-01.jpg/1280px-Ethiopia-Lalibela-Church_of_Saint_George-01.jpg" alt="Lalibela Rock-Hewn Churches">
+                    </div>
+                    <div class="place-info">
+                        <h3 class="place-title">Lalibela Rock-Hewn Churches</h3>
+                        <p class="place-description">A UNESCO World Heritage site consisting of 11 medieval monolithic cave churches carved from solid rock. King Lalibela built these churches in the 12th-13th centuries to create a 'New Jerusalem'.</p>
+                    </div>
+                </div>
+
+                <!-- Axum -->
+                <div class="place-card">
+                    <div class="place-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Axum_obelisk.jpg/800px-Axum_obelisk.jpg" alt="Axum Obelisks">
+                    </div>
+                    <div class="place-info">
+                        <h3 class="place-title">Axum Obelisks</h3>
+                        <p class="place-description">The ancient city of Axum features massive obelisks (stelae) that are remnants of the Axumite Kingdom, one of Africa's most powerful states between the 1st and 7th centuries CE.</p>
+                    </div>
+                </div>
+
+                <!-- Simien Mountains -->
+                <div class="place-card">
+                    <div class="place-image">
+                        <img src="https://images.unsplash.com/photo-1602437093619-299042c02685?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Simien Mountains">
+                    </div>
+                    <div class="place-info">
+                        <h3 class="place-title">Simien Mountains</h3>
+                        <p class="place-description">A spectacular landscape with jagged mountain peaks, deep valleys, and sharp precipices dropping up to 1,500m. The park is home to rare wildlife including the Ethiopian wolf and Gelada baboon.</p>
+                    </div>
+                </div>
+
+                <!-- Sof Omar Caves -->
+                <div class="place-card">
+                    <div class="place-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Sof_Omar_Cave%2C_Bale%2C_Ethiopia_%282%29.jpg/1280px-Sof_Omar_Cave%2C_Bale%2C_Ethiopia_%282%29.jpg" alt="Sof Omar Caves">
+                    </div>
+                    <div class="place-info">
+                        <h3 class="place-title">Sof Omar Caves</h3>
+                        <p class="place-description">The longest cave system in Ethiopia, extending for nearly 16km. The caves have been used for centuries as a place of worship by local Muslims and feature spectacular limestone formations.</p>
+                    </div>
+                </div>
+
+                <!-- Fasil Ghebbi -->
+                <div class="place-card">
+                    <div class="place-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Fasil_Ghebbi_Gondar_Ethiopia.jpg/1280px-Fasil_Ghebbi_Gondar_Ethiopia.jpg" alt="Fasil Ghebbi">
+                    </div>
+                    <div class="place-info">
+                        <h3 class="place-title">Fasil Ghebbi</h3>
+                        <p class="place-description">A fortress-city within Gondar, built in the 17th century by Emperor Fasilides. The complex contains palaces, churches, monasteries, and unique public and private buildings.</p>
+                    </div>
+                </div>
+
+                <!-- Harar Jugol -->
+                <div class="place-card">
+                    <div class="place-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/ET_Harar_asv2018-01_img40_view_from_wall.jpg/1280px-ET_Harar_asv2018-01_img40_view_from_wall.jpg" alt="Harar Jugol">
+                    </div>
+                    <div class="place-info">
+                        <h3 class="place-title">Harar Jugol</h3>
+                        <p class="place-description">The fortified historic town of Harar is considered the fourth holy city of Islam. With 82 mosques and 102 shrines, this walled city has preserved its traditions and distinctive architectural character.</p>
+                    </div>
+                </div>
+
+                <!-- Blue Nile Falls -->
+                <div class="place-card">
+                    <div class="place-image">
+                        <img src="https://images.unsplash.com/photo-1520507561081-bc7dfbae28f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Blue Nile Falls">
+                    </div>
+                    <div class="place-info">
+                        <h3 class="place-title">Blue Nile Falls</h3>
+                        <p class="place-description">Known locally as Tis Abay (smoking water), these falls are one of Ethiopia's most stunning natural attractions. During the rainy season, the falls are over 400m wide and 45m deep.</p>
+                    </div>
+                </div>
+
+                <!-- Tiya Stelae -->
+                <div class="place-card">
+                    <div class="place-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Tiya%2C_Ethiopia_%2814%29_%282%29.jpg/1280px-Tiya%2C_Ethiopia_%2814%29_%282%29.jpg" alt="Tiya Stelae">
+                    </div>
+                    <div class="place-info">
+                        <h3 class="place-title">Tiya Stelae</h3>
+                        <p class="place-description">An archaeological site containing 36 stone monuments decorated with enigmatic symbols. These monuments mark graves from a medieval Ethiopian culture not yet fully understood by archaeologists.</p>
+                    </div>
+                </div>
+
+                <!-- Danakil Depression -->
+                <div class="place-card">
+                    <div class="place-image">
+                        <img src="https://images.unsplash.com/photo-1582655432760-c59c9bf91ca8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Danakil Depression">
+                    </div>
+                    <div class="place-info">
+                        <h3 class="place-title">Danakil Depression</h3>
+                        <p class="place-description">One of the hottest and lowest places on Earth, featuring otherworldly landscapes with colorful sulfur springs, salt formations, and lava lakes. The area is known for its extreme conditions and unique ecology.</p>
+                    </div>
+                </div>
+
+                <!-- Lake Tana Monasteries -->
+                <div class="place-card">
+                    <div class="place-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Daga_Istifanos_Monastery_Lake_Tana_Ethiopia.jpg/1280px-Daga_Istifanos_Monastery_Lake_Tana_Ethiopia.jpg" alt="Lake Tana Monasteries">
+                    </div>
+                    <div class="place-info">
+                        <h3 class="place-title">Lake Tana Monasteries</h3>
+                        <p class="place-description">Lake Tana, the source of the Blue Nile, is home to over 20 ancient Orthodox Christian monasteries. Many contain impressive mural paintings and historic religious artifacts dating back to the 14th century.</p>
+                    </div>
+                </div>
+
+                <!-- Omo Valley -->
+                <div class="place-card">
+                    <div class="place-image">
+                        <img src="https://images.unsplash.com/photo-1524255684952-d7185b509571?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Omo Valley">
+                    </div>
+                    <div class="place-info">
+                        <h3 class="place-title">Omo Valley</h3>
+                        <p class="place-description">Home to diverse indigenous ethnic groups maintaining traditional ways of life. The lower Omo Valley is a UNESCO World Heritage site known for its cultural richness and archaeological significance.</p>
+                    </div>
+                </div>
+
+                <!-- Bale Mountains -->
+                <div class="place-card">
+                    <div class="place-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Ethiopian_Wolf_%28Canis_simensis%29_in_Bale_Mountains.jpg/1280px-Ethiopian_Wolf_%28Canis_simensis%29_in_Bale_Mountains.jpg" alt="Bale Mountains">
+                    </div>
+                    <div class="place-info">
+                        <h3 class="place-title">Bale Mountains</h3>
+                        <p class="place-description">A biodiversity hotspot featuring Afro-alpine moorlands, cloud forests, and volcanic plateaus. The park is home to many endemic species including the Ethiopian wolf, mountain nyala, and giant mole rat.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Ethiopia<span>Heritage</span></div>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="places.html">Places</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <p class="copyright">&copy; 2025 Ethiopia Heritage. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

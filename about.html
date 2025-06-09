@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethiopia's Heritage - About Us</title>
+    <style>
+        /* Global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: #4b1d1d;
+            color: #fff;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffcc00;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #fff;
+        }
+        
+        /* Navigation styles */
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: #ffcc00;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        /* Active page styling */
+        .active {
+            color: #ffcc00 !important;
+        }
+        
+        .active:after {
+            width: 100%;
+            background-color: #ffcc00;
+        }
+        
+        /* Login/Logout link styling */
+        .login-link {
+            background-color: #ffcc00;
+            color: #333 !important;
+            padding: 8px 15px !important;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .login-link:hover {
+            background-color: #e6b800;
+            color: #333 !important;
+        }
+        
+        .login-link:after {
+            display: none;
+        }
+        
+        .user-menu {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .user-menu-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #fff;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 101;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .user-menu:hover .user-menu-content {
+            display: block;
+        }
+        
+        .user-menu-content a {
+            color: #333 !important;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        
+        .user-menu-content a:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .user-menu-content a:after {
+            display: none;
+        }
+        
+        /* About section */
+        .about-section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #4b1d1d;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: #ffcc00;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .mission-section {
+            background-color: #fff;
+            padding: 60px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mission-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .mission-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #4b1d1d;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .mission-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: #ffcc00;
+        }
+        
+        .mission-content p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        /* Footer styles */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffcc00;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+            display: flex;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links li {
+            margin: 0 15px;
+        }
+        
+        .footer-links li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links li a:hover {
+            color: #ffcc00;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                order: -1;
+                margin-bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">Ethiopia<span>Heritage</span></a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                       
+                      
+                        <li><a href="about.html" class="active">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li class="user-menu">
+                            <a href="login.html" class="login-link">Login</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title">About Our Project</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Welcome to the Ethiopia Heritage project, a static educational website dedicated to showcasing the rich historical and natural landmarks of Ethiopia. This project was created to promote awareness and appreciation of Ethiopia's diverse cultural heritage and breathtaking landscapes.</p>
+                    <p>Ethiopia, with its ancient history dating back thousands of years, is home to some of the world's most significant archaeological sites, unique ecosystems, and vibrant cultural traditions. Despite this incredible wealth of heritage, Ethiopia's historical and natural treasures remain relatively unknown to many people around the world.</p>
+                    <p>Our project aims to bridge this knowledge gap by providing accessible, visually engaging, and informative content about Ethiopia's UNESCO World Heritage sites, natural wonders, and cultural landmarks. Through this website, we hope to inspire curiosity, foster cultural understanding, and perhaps even motivate visitors to explore these remarkable places in person.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1531219572328-a0171b4448a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Ethiopian Cultural Heritage">
+                </div>
+            </div>
+            
+            <!-- Mission Section -->
+            <div class="mission-section">
+                <div class="mission-content">
+                    <h3 class="mission-title">Our Mission</h3>
+                    <p>Our mission is to document, preserve, and share knowledge about Ethiopia's cultural and natural heritage sites through digital media. We believe in the power of education to foster appreciation for diverse cultures and natural environments.</p>
+                    <p>This website serves as an educational resource for students, travelers, researchers, and anyone interested in learning more about Ethiopia's remarkable contributions to world heritage. All content on this site is created for educational purposes only.</p>
+                    <p>Ethiopia Heritage is a static educational project with no commercial interests. All images used are sourced from free stock photo sites like Unsplash, Pixabay, or Wikimedia Commons under appropriate licenses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Ethiopia<span>Heritage</span></div>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="places.html">Places</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <p class="copyright">&copy; 2025 Ethiopia Heritage. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
